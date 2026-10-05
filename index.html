@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Shaurya Sudheer Muvva - Portfolio</title>
+ 
+    <style>
+        /* colors + a couple of layout constants, tweak these and the rest follows */
+        :root {
+            --bg-color: #1d55d6;
+            --card-bg: #1e293b;
+            --card-border: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-color: #3bf6b8;
+            --accent-hover: #eb8125;
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --max-width: 1100px;
+        }
+ 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+ 
+        html {
+            scroll-behavior: smooth;
+        }
+ 
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-family);
+            line-height: 1.6;
+        }
+ 
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            
+        }
+ 
+        a:hover {
+            color: var(--accent-hover);
+        }
+ 
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+ 
+        section {
+            padding: 5rem 0;
+        }
+ 
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            position: relative;
+        }
+ 
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+ 
+        /* fixed nav bar up top */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid var(--card-border);
+            
+        }
+ 
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+ 
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: 0.5px;
+        }
+ 
+        .logo span {
+            color: var(--accent-color);
+        }
+ 
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+ 
+        .nav-links a {
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+ 
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+ 
+        /* hero / intro */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 70px;
+        }
+ 
+        .hero-content {
+            max-width: 800px;
+        }
+ 
+        .hero-tag {
+            color: var(--accent-color);
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+ 
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+ 
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+ 
+        .hero-actions {
+            margin-bottom: 2.5rem;
+        }
+ 
+        .hero-image-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2.5rem;
+        }
+ 
+        .profile-img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center 25%;
+            border: 4px solid var(--accent-color);
+            box-shadow: 0 10px 25px 5px rgba(59, 130, 246, 0.3);
+            
+        }
+ 
+        .profile-img:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-hover);
+        }
+ 
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: #ffffff;
+            padding: 0.75rem 1.75rem;
+            border-radius: 6px;
+            font-weight: 600;
+            
+        }
+ 
+        .btn:hover {
+            background-color: var(--accent-hover);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+ 
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--card-border);
+            color: var(--text-primary);
+            margin-left: 1rem;
+        }
+ 
+        .btn-outline:hover {
+            border-color: var(--accent-color);
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+ 
+        /* about */
+        .about-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+ 
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+        }
+ 
+        .about-highlights {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--card-border);
+            text-align: center;
+        }
+ 
+        .highlight-item h3 {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+        }
+ 
+        .highlight-item p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0;
+        }
+ 
+        /* project cards */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+ 
+        .project-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+ 
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+ 
+        .project-header {
+            margin-bottom: 1rem;
+        }
+ 
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+ 
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+ 
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+ 
+        .tag {
+            background-color: rgba(59, 130, 246, 0.15);
+            color: var(--accent-color);
+            font-size: 0.8rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+ 
+        .project-link {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+ 
+        /* skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+ 
+        .skill-group {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 1.8rem;
+        }
+ 
+        .skill-group h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--accent-color);
+            display: inline-block;
+            padding-bottom: 0.3rem;
+        }
+ 
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+ 
+        .skill-badge {
+            background-color: #0f172a;
+            border: 1px solid var(--card-border);
+            color: var(--text-secondary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+ 
+        /* contact */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+ 
+        .contact-info {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 2rem;
+        }
+ 
+        .info-item {
+            margin-bottom: 1.5rem;
+        }
+ 
+        .info-item h4 {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.25rem;
+        }
+ 
+        .info-item p {
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+ 
+        .contact-form {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 2rem;
+        }
+ 
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+ 
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+ 
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: black;
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+ 
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+ 
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+ 
+        footer {
+            background-color: #0b1120;
+            border-top: 1px solid var(--card-border);
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+ 
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+ 
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+ 
+            .about-highlights {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+ 
+            .nav-links {
+                gap: 1rem;
+            }
+ 
+            .nav-links a {
+                font-size: 0.85rem;
+            }
+ 
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 1rem;
+                display: inline-block;
+            }
+        }
+    </style>
+</head>
+<body>
+ 
+    <header>
+        <div class="container navbar">
+            <a href="#" class="logo">Shaurya<span>.dev</span></a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+ 
+    <main>
+        <!-- intro / hero -->
+        <section class="hero">
+            <div class="container hero-content">
+                <p class="hero-tag">hey, I'm</p>
+                <h1 class="hero-title">Shaurya Muvva</h1>
+                <p class="hero-subtitle">CS student who likes untangling hard problems and shipping small things that work</p>
+ 
+                <div class="hero-actions">
+                    <a href="#projects" class="btn">See what I've built</a>
+                    <a href="#contact" class="btn btn-outline">Say hi</a>
+                </div>
+ 
+                <div class="hero-image-wrapper">
+                    <img
+                        src="formal_photo.JPG"
+                        alt="Shaurya Sudheer Muvva - Profile Photo"
+                        class="profile-img"
+                    >
+                </div>
+            </div>
+        </section>
+ 
+        <!-- about -->
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">A bit about me</h2>
+                <div class="about-card">
+                    <div class="about-text">
+                        <p>
+                            I'm a CSE student, and most of my time goes into two things: figuring out why my code
+                            isn't doing what I think it's doing, and building small web projects to see if an idea
+                            actually works the way I imagined it in my head. I like DSA more than I expected to when
+                            I started college.
+                        </p>
+                        <p>
+                            Outside of classes I do a fair bit of competitive coding, mess around with AI tools to
+                            see what they're actually good for, and build little web things mostly to learn by
+                            breaking stuff and fixing it again.
+                        </p>
+                    </div>
+                    <div class="about-highlights">
+                        <div class="highlight-item">
+                            <h3>BS Hon. - Data Science and Applications(IIT-Madras)</h3>
+                            <p>Currently studying</p>
+                        </div>
+                        <div class="highlight-item">
+                            <h3>1</h3>
+                            <p>Projects I've actually finished</p>
+                        </div>
+                        <div class="highlight-item">
+                            <h3>10+</h3>
+                            <p>DSA problems solved</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+ 
+        <!-- projects -->
+        <section id="projects">
+            <div class="container">
+                <h2 class="section-title">Things I've built</h2>
+                <div class="projects-grid">
+ 
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">xyz</h3>
+                            <p class="project-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet tenetur reprehenderit ratione facilis aliquam architecto itaque nobis ullam et veniam, iusto officia totam nihil omnis. Minima fugit sit facilis iste, aspernatur illum accusantium nostrum suscipit quidem, placeat dolorum harum sed quam quod. Aperiam amet provident animi ducimus itaque voluptatum qui!</p>
+                            <div class="project-tags">
+                                <span class="tag">1</span>
+                                <span class="tag">2</span>
+                                <span class="tag">3</span>
+                            </div>
+                        </div>
+                        <a href="#" class="project-link">Check the code &rarr;</a>
+                    </div>
+ 
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">abc</h3>
+                            <p class="project-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio, laborum eligendi recusandae animi commodi officiis quos, eum, voluptatum iure porro delectus similique cum quasi rerum dolorum minus sint doloribus quam? Corrupti quod id voluptatibus atque fuga nisi, unde dolorum, pariatur deserunt expedita, ipsam dolor. Soluta ut eligendi nemo enim deserunt.</p>
+                            <div class="project-tags">
+                                <span class="tag">1</span>
+                                <span class="tag">2</span>
+                                <span class="tag">3</span>
+                            </div>
+                        </div>
+                        <a href="#" class="project-link">See it live &rarr;</a>
+                    </div>
+ 
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">def</h3>
+                            <p class="project-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Et distinctio similique itaque laboriosam corrupti inventore quidem, debitis quo impedit, nemo aperiam consectetur doloremque porro quis veniam ducimus! Dicta quos porro ex nisi, quibusdam veritatis blanditiis reiciendis amet suscipit voluptas, odio expedita possimus atque, aspernatur hic perspiciatis dolorum. Dicta, architecto quis!</p>
+                            <div class="project-tags">
+                                <span class="tag">1</span>
+                                <span class="tag">2</span>
+                                <span class="tag">3</span>
+                            </div>
+                        </div>
+                        <a href="#" class="project-link">View repo &rarr;</a>
+                    </div>
+ 
+                </div>
+            </div>
+        </section>
+ 
+        <!-- skills -->
+        <section id="skills">
+            <div class="container">
+                <h2 class="section-title">What I work with</h2>
+                <div class="skills-grid">
+ 
+                    <div class="skill-group">
+                        <h3>Languages</h3>
+                        <div class="skill-list">
+                            <span class="skill-badge">Java</span>
+                            <span class="skill-badge">Python</span>
+                            <span class="skill-badge">HTML</span>
+                            <span class="skill-badge">CSS</span>
+                            <span class="skill-badge">JavaScript (still learning)</span>
+                        </div>
+                    </div>
+ 
+                    <div class="skill-group">
+                        <h3>Web Dev</h3>
+                        <div class="skill-list">
+                            <span class="skill-badge">Responsive Design</span>
+                            <span class="skill-badge">Flexbox</span>
+                            <span class="skill-badge">CSS Grid</span>
+                            <span class="skill-badge">Semantic HTML</span>
+                            <span class="skill-badge">JavaScript (Basic)</span>
+                        </div>
+                    </div>
+ 
+                    <div class="skill-group">
+                        <h3>Tools</h3>
+                        <div class="skill-list">
+                            <span class="skill-badge">Git & GitHub</span>
+                            <span class="skill-badge">VS Code</span>
+                            <span class="skill-badge">Linux Commands</span>
+                            <span class="skill-badge">AI tools (Claude, ChatGPT)</span>
+                        </div>
+                    </div>
+ 
+                </div>
+            </div>
+        </section>
+ 
+        <!-- contact -->
+        <section id="contact">
+            <div class="container">
+                <h2 class="section-title">Let's talk</h2>
+                <div class="contact-container">
+ 
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <h4>Email</h4>
+                            <p>shaurya.26bcs10320@sst.scaler.com</p>
+                        </div>
+                        <div class="info-item">
+                            <h4>LinkedIn</h4>
+                            <p>www.linkedin.com/in/ShauryaMuvva29</p>
+                        </div>
+                        <div class="info-item">
+                            <h4>GitHub</h4>
+                            <p>github.com/ShauryaMuvva29</p>
+                        </div>
+                        <div class="info-item">
+                            <h4>Location</h4>
+                            <p>India</p>
+                        </div>
+                    </div>
+ 
+                    <form class="contact-form" action="#" method="post">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" placeholder="What should I call you?" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" name="email" placeholder="So I can actually reply" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="What's up?"></textarea>
+                        </div>
+                        <a href="end.html">
+                        <button type="submit" class="btn" style="border: none; cursor: pointer; ">Send it</button>
+                        </a>
+                    </form>
+ 
+                </div>
+            </div>
+        </section>
+    </main>
+ 
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Shaurya Sudheer Muvva. Built for a college project, kept because I like how it turned out.</p>
+        </div>
+    </footer>
+ 
+</body>
+</html>
+ 
